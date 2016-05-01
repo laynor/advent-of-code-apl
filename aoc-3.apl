@@ -52,13 +52,18 @@ RIGHT:
   R←R+(M='>')×1 0
 ∇
 
-∇R←Day3∆1
-  I← FIO∆read_file input3.txt
+∇R ← VisitedPositions I
   ⍝ transform the input I to a list of displacement vectors,
   ⍝ calculate the position at each input summing the displacement vectors
   ⍝ uniquify, and return the vector dimension
-  R← ⍴∪(⊂0 0),(+\∆s¨I)
+  R←(⊂0 0),(+\∆s¨I)
 ∇
+
+∇R←Day3∆1
+  I← FIO∆read_file input3.txt
+  R← ∪VisitedPositions I
+∇
+
 ⍝ --- Part Two ---
 
 ⍝ The next year, to speed up the process, Santa creates a robot version of
@@ -84,9 +89,7 @@ RIGHT:
 
 ∇R←Day3∆2
   I← FIO∆read_file 'input3.txt'
-  ISanta ← ((⍴I)⍴1 0)/I
-  IRoboSanta ← ((⍴I)⍴0 1)/I
-  VisitedSanta ← (⊂0 0),(+\∆s¨ISanta)
-  VisitedRoboSanta ← (⊂0 0),(+\∆s¨IRoboSanta)
-  R←⍴∪(VisitedSanta,VisitedRoboSanta)
+  I∆Santa ← ((⍴I)⍴1 0)/I
+  I∆RoboSanta ← ((⍴I)⍴0 1)/I
+  R←⍴ ∪(VisitedPositions I∆Santa),(VisitedPositions I∆RoboSanta)
 ∇
